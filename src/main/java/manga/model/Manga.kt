@@ -11,6 +11,10 @@ data class Manga(
 
         val title: String? = null,
 
+        val nbChapters: Int? = null,
+
+        val nbPages: Int? = null,
+
         @ManyToOne
         @JoinColumn(name = "author_id")
         val author: Mangaka? = null,

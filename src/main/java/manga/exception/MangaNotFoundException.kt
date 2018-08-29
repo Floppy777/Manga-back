@@ -1,3 +1,3 @@
-package manga.exeption
+package manga.exception
 
 class MangaNotFoundException(): Exception()

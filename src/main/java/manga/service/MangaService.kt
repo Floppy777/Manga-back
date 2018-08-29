@@ -1,6 +1,6 @@
 package manga.service
 
-import manga.exeption.MangaNotFoundException
+import manga.exception.MangaNotFoundException
 import manga.model.Manga
 import manga.repository.MangaRepository
 import org.springframework.stereotype.Service
@@ -17,7 +17,9 @@ class MangaService(private val mangaRepository: MangaRepository) {
 
     fun deleteManga(manga: Manga) = mangaRepository.delete(manga)
 
-    fun persistManga(manga: Manga) = mangaRepository.save(manga)
+    fun persistManga(manga: Manga): Manga {
+        return mangaRepository.save(manga)
+    }
 
     fun getAllMangas(): Iterable<Manga> {
         val mangaCollection = mangaRepository.findAll().toList()
@@ -29,7 +31,7 @@ class MangaService(private val mangaRepository: MangaRepository) {
 
     fun updateManga(id: Int, manga: Manga) : Manga {
         val targetManga: Manga = this.getMangaById(id)
-        targetManga.copy(manga.isbn,manga.title,manga.author,manga.readingDetails)
+        targetManga.copy(manga.isbn,manga.title,manga.nbPages,manga.nbChapters,manga.author,manga.readingDetails)
         return mangaRepository.save(targetManga)
     }
 

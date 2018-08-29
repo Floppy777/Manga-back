@@ -1,6 +1,6 @@
 package manga.controller
 
-import manga.exeption.MangakaNotFoundException
+import manga.exception.MangakaNotFoundException
 import manga.model.Mangaka
 import manga.service.MangakaService
 import org.springframework.http.HttpStatus
@@ -31,7 +31,7 @@ class MangakaController(val mangakaService: MangakaService) {
 
 
     /**
-     * Get All mangakas in the database
+     * Get specified mangaka in the database
      * @return 200 OK
      * @return 404 Mangaka specified id not found
      * @return 500 Internal Error
@@ -55,8 +55,7 @@ class MangakaController(val mangakaService: MangakaService) {
     @PostMapping
     fun createMangaka(@RequestBody mangaka: Mangaka): ResponseEntity<Mangaka> {
         return try {
-            val persistedMangaka = this.mangakaService.persistMangaka(mangaka)
-            ResponseEntity.status(HttpStatus.CREATED).body(persistedMangaka)
+            ResponseEntity.status(HttpStatus.CREATED).body(this.mangakaService.persistMangaka(mangaka))
         }catch(e: Exception){
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
         }

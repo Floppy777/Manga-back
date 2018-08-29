@@ -1,6 +1,6 @@
 package manga.service
 
-import manga.exeption.MangakaNotFoundException
+import manga.exception.MangakaNotFoundException
 import manga.repository.MangakaRepository
 import manga.model.Mangaka
 import org.springframework.stereotype.Service
