@@ -1,3 +1,4 @@
 package manga.exception
 
-class MangakaNotFoundException() : Exception()
+
+data class MangakaNotFoundException(val errorMessage: String) : Exception()

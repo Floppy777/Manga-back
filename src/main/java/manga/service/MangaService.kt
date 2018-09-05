@@ -13,7 +13,7 @@ class MangaService(private val mangaRepository: MangaRepository) {
      * Get specified Manga
      * @throws MangaNotFoundException
      */
-    fun getMangaById(id: Int) = mangaRepository.findById(id).orElseThrow { MangaNotFoundException() }
+    fun getMangaById(id: Int) = mangaRepository.findById(id).orElseThrow { MangaNotFoundException("Manga not found : $id") }
 
     fun deleteManga(manga: Manga) = mangaRepository.delete(manga)
 
@@ -21,10 +21,11 @@ class MangaService(private val mangaRepository: MangaRepository) {
         return mangaRepository.save(manga)
     }
 
+    @Throws(MangaNotFoundException::class)
     fun getAllMangas(): Iterable<Manga> {
         val mangaCollection = mangaRepository.findAll().toList()
         if(mangaCollection.isEmpty()){
-            throw MangaNotFoundException()
+            throw MangaNotFoundException("Manga collection is empty")
         }
         return mangaCollection
     }

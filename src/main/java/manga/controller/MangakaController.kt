@@ -20,13 +20,7 @@ class MangakaController(val mangakaService: MangakaService) {
      */
     @GetMapping
     fun getAllMangakas() : ResponseEntity<Iterable<Mangaka>>{
-        return try {
-            ResponseEntity.status(HttpStatus.OK).body(mangakaService.getAllMangakas())
-        }catch(e: MangakaNotFoundException) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
-        }catch(e: Exception){
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(mangakaService.getAllMangakas())
     }
 
 
@@ -38,13 +32,7 @@ class MangakaController(val mangakaService: MangakaService) {
      */
     @GetMapping("{id}")
     fun getMangakaById(@PathVariable("id") id: Int) : ResponseEntity<Mangaka>{
-        return try {
-            ResponseEntity.status(HttpStatus.OK).body(mangakaService.getMangakaById(id))
-        }catch (e: MangakaNotFoundException){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
-        }catch (e: Exception){
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
-        }
+       return ResponseEntity.status(HttpStatus.OK).body(mangakaService.getMangakaById(id))
     }
 
     /**
@@ -54,10 +42,6 @@ class MangakaController(val mangakaService: MangakaService) {
      */
     @PostMapping
     fun createMangaka(@RequestBody mangaka: Mangaka): ResponseEntity<Mangaka> {
-        return try {
-            ResponseEntity.status(HttpStatus.CREATED).body(this.mangakaService.persistMangaka(mangaka))
-        }catch(e: Exception){
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
-        }
+       return ResponseEntity.status(HttpStatus.CREATED).body(this.mangakaService.persistMangaka(mangaka))
     }
 }
